@@ -81,32 +81,33 @@ def get_user_input():
     return features
 
 user_input = get_user_input()
-st.write(user_input)
+prediction = model.predict(user_input)
+
+
+def get_rendement_prediction(prediction):
+    pred = round(prediction[0][0])
+    
+    if pred > 100:
+        pred = 100
+    return pred
+
+rendement = get_rendement_prediction(prediction)
+
+
+#résultats ML input user 
+st.subheader('Résultats du modèle :')
+col1, col2 = st.columns(2)
+col1.metric("Rendement estimé", f"{rendement} %", round(prediction[0][0], 2))
+col2.metric("Quantité de produit", f"{round(prediction[0][1],2)} kg/ha", round(prediction[0][1], 2))
+
+
+col1, col2 = st.columns(2)
+col1.write('Donnée saisies par l\'utilisateur :')
+col1.write(user_input)
+
+
+col2.write('Output modèle :')
+col2.write(prediction)
 
 
 
-
-
-
-
-
-with st.echo(code_location='below'):
-    total_points = st.slider("Number of points in spiral", 1, 5000, 2000)
-    num_turns = st.slider("Number of turns in spiral", 1, 100, 9)
-
-    Point = namedtuple('Point', 'x y')
-    data = []
-
-    points_per_turn = total_points / num_turns
-
-    for curr_point_num in range(total_points):
-        curr_turn, i = divmod(curr_point_num, points_per_turn)
-        angle = (curr_turn + 1) * 2 * math.pi * i / points_per_turn
-        radius = curr_point_num / total_points
-        x = radius * math.cos(angle)
-        y = radius * math.sin(angle)
-        data.append(Point(x, y))
-
-    st.altair_chart(alt.Chart(pd.DataFrame(data), height=500, width=500)
-        .mark_circle(color='#0068c9', opacity=0.5)
-        .encode(x='x:Q', y='y:Q'))
