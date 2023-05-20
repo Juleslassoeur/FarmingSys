@@ -31,7 +31,7 @@ list_maladies = {
     'F': 6
 }
 
-csv_url = "https://raw.githubusercontent.com/Juleslassoeur/FarmingSys/main/df4.csv"
+csv_url = "https://raw.githubusercontent.com/Juleslassoeur/farmingsys/main/df4.csv"
 
 df = pd.read_csv(csv_url)
 df['Produit'] = df['Produit'].replace(list_produits)
