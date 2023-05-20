@@ -56,6 +56,40 @@ st.write("Aperçu du data set : ")
 st.write(df_display)
 
 
+#user input 
+def get_user_input():
+    vol_eau = st.sidebar.slider('Volume d\'eau', 100, 350, 200)
+    temp = st.sidebar.slider('Température', 10, 35, 15)
+    prod = st.sidebar.selectbox('Produit', options=list_produits)
+    selected_prod = list_produits[prod]
+    
+    maladie = st.sidebar.selectbox('Maladie', options=list_maladies)
+    selected_maladie = list_maladies[maladie]
+    
+    cereales = st.sidebar.selectbox('Céréales', options=list_cereales)
+    selected_cereales = list_cereales[cereales]
+
+    user_data = {
+        'vol_eau' : vol_eau,
+        'maladie' : selected_maladie,
+        'temp' : temp,
+        'prod' : selected_prod,
+        'cereales' : selected_cereales
+    }
+
+    features = pd.DataFrame(user_data, index=[0])
+    return features
+
+user_input = get_user_input()
+st.write(user_input)
+
+
+
+
+
+
+
+
 with st.echo(code_location='below'):
     total_points = st.slider("Number of points in spiral", 1, 5000, 2000)
     num_turns = st.slider("Number of turns in spiral", 1, 100, 9)
