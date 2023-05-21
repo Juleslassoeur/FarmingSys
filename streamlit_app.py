@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+import numpy as np
 
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
@@ -105,6 +106,29 @@ col1.write(user_input)
 
 col2.write('Output modèle :')
 col2.write(prediction)
+
+st.subheader('Analyse des résultats par produits :')
+#chart avec les performances par types de produits avec les input des users 
+
+result = []
+
+def get_all_data(user_inpupt):
+    for i in list_produits.items():
+        user_input2  = user_input
+        user_input2['prod'].replace(user_input2["prod"][0] , i[1], inplace=True)
+        pred = model.predict(user_input2)
+        result.append(pred[0])
+        print(pred[0]) 
+
+get_all_data(user_input)
+result_list = [np.ndarray.tolist(element) for element in result]
+
+#graph avec les rendements et les quantités par produits
+chart_data = pd.DataFrame(
+    result_list,
+    columns=['Rendement', 'Quantité'])
+
+st.line_chart(chart_data)
 
 
 
