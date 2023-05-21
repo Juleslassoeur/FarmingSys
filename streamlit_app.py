@@ -108,7 +108,7 @@ result = []
 
 def get_all_data(user_inpupt):
     for i in list_produits.items():
-        user_input2  = user_input
+        user_input2  = user_input.copy()
         user_input2['prod'].replace(user_input2["prod"][0] , i[1], inplace=True)
         pred = model.predict(user_input2)
         result.append(pred[0])
