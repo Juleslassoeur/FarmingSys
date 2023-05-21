@@ -35,10 +35,10 @@ list_maladies = {
 }
 
 
-df = pd.read_csv("df4.csv")
+df = pd.read_csv("df4-2.csv")
 df['Produit'] = df['Produit'].replace(list_produits)
 df['Maladie'] = df['Maladie'].replace(list_maladies)
-df_display = pd.read_csv("df4.csv")
+df_display = pd.read_csv("df4-2.csv")
 
 
 #ML multi output 
