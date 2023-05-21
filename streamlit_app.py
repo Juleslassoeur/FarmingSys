@@ -117,7 +117,7 @@ get_all_data(user_input)
 
 
 result_list = [np.ndarray.tolist(element) for element in result] #convertir les arrays en listes
-index = max(enumerate(result_list), key=lambda x: max(x[1]))[0] #rendement max de tous les produits 
+index = max(enumerate(result_list), key=lambda x: x[1][0])[0] #rendement max de tous les produits 
 
 key = list(list_produits.keys())[list(list_produits.values()).index(value)] #index de la valeur max 
 
