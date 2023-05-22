@@ -128,7 +128,7 @@ col2.metric("Quantité de produit", f"{round(prediction[0][1],2)} kg/ha", round(
 col3.metric("Produit", key, list(list_produits.keys())[index])
 
 col1, col2 = st.columns(2)
-col1.write('Donnée saisies par l\'utilisateur :')
+col1.write('Données saisies par l\'utilisateur :')
 col1.write(user_input)
 
 
